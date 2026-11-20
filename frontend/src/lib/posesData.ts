@@ -1,0 +1,791 @@
+import { Pose } from '../api/client';
+
+export type WorkoutPhase = 'warmup' | 'exercise' | 'relax';
+
+export interface EnrichedPose extends Pose {
+  phase: WorkoutPhase;
+  category: 'spine' | 'balance' | 'flexibility' | 'relaxation' | 'strength';
+  target_muscles: string[];
+  recommended_sets: number;
+  recommended_rest_seconds: number;
+  suitable_for_injuries: string[];
+  avoid_for_injuries: string[];
+}
+
+export const ALL_POSES: EnrichedPose[] = [
+  // --- WARMUP POSES ---
+  {
+    id: 'neck_rolls',
+    phase: 'warmup',
+    english_name: 'Gentle Neck Rolls',
+    hindi_name: 'ग्रीवा संचालन',
+    hinglish_name: 'Greeva Sanchalana (Neck Rolls)',
+    how_to_en: [
+      'Sit comfortably in a chair or cross-legged with your spine straight.',
+      'Exhale and slowly drop your chin down toward your chest.',
+      'Inhale and circle your head in a smooth, continuous clockwise motion.',
+      'Complete 3 slow clockwise circles, then reverse for 3 counter-clockwise circles.'
+    ],
+    how_to_hi: [
+      'सुखासन या कुर्सी पर रीढ़ सीधी करके बैठें।',
+      'सांस छोड़ते हुए ठुड्डी को धीरे से सीने की तरफ लाएं।',
+      'सांस भरते हुए गर्दन को घड़ी की दिशा में गोल घुमाएं।',
+      '3 बार क्लॉकवाइज और फिर 3 बार एंटी-क्लॉकवाइज धीरे-धीरे दोहराएं।'
+    ],
+    how_to: [
+      'Sukhasana ya chair par peeth seedhi karke baith jayein.',
+      'Saans chhodte hue thodi ko dheere se chhaati ki taraf jhukayein.',
+      'Dheemi gati se gardan ko clockwise gol ghumayein, jhatka na dein.',
+      '3 chakkar clockwise aur 3 chakkar anticlockwise poore karein.'
+    ],
+    default_hold_seconds: 25,
+    recommended_sets: 2,
+    recommended_rest_seconds: 15,
+    camera_supported: true,
+    caution_en: 'If prone to dizziness, tilt neck side-to-side rather than in full 360-degree circles.',
+    caution_hi: 'चक्कर आने की स्थिति में पूरा गोल न घुमाएं, केवल दाएं-बाएं करें।',
+    caution: 'Chakkar aate hon ya severe cervical ho to poora gol na ghumayein, sirf left-right karein.',
+    image_url: '/poses/griva_sanchalana.jpg',
+    target_angles_text: 'Torso erect | Joints aligned',
+    benefit_en: 'Releases cervical tightness, desk stiffness, and relieves screen tension headaches.',
+    benefit_hi: 'गर्दन के तनाव, सर्वाइकल और सिरदर्द में तुरंत राहत दिलाता है।',
+    category: 'flexibility',
+    target_muscles: ['Cervical Spine', 'Trapezius', 'Neck Rotators'],
+    suitable_for_injuries: ['Cervical Stiffness', 'Desk Worker Tech Neck', 'Headache'],
+    avoid_for_injuries: ['Severe Cervical Radiculopathy']
+  },
+  {
+    id: 'marjaryasana_bitilasana',
+    phase: 'warmup',
+    english_name: 'Cat-Cow Pose',
+    hindi_name: 'मार्जरी-बितिलासन',
+    hinglish_name: 'Marjaryasana-Bitilasana (Cat-Cow)',
+    how_to_en: [
+      'Start on your hands and knees in a tabletop position.',
+      'Inhale, arch your back gently and look upward (Cow Pose).',
+      'Exhale, round your spine toward the ceiling and tuck your chin (Cat Pose).',
+      'Flow smoothly with your breath for 5 to 6 repetitions.'
+    ],
+    how_to_hi: [
+      'हथेलियों और घुटनों के बल मेज की स्थिति (tabletop) में आएं।',
+      'सांस भरते हुए कमर को नीचे करें और ऊपर देखें (काउ पोज)।',
+      'सांस छोड़ते हुए पीठ को ऊपर गोल करें और ठुड्डी सीने से लगाएं (कैट पोज)।',
+      'इस चक्र को धीमी गति से 5-6 बार दोहराएं।'
+    ],
+    how_to: [
+      'Hathheliyo aur ghutno ke bal tabletop position mein aayein.',
+      'Saans lete hue pet ko zameen ki taraf layein aur upar dekhein (Cow pose).',
+      'Saans chhodte hue peeth ko gol karein aur thodi chhaati se lagayein (Cat pose).',
+      'Ise dheemi gati se 5-6 baar dohrayein.'
+    ],
+    default_hold_seconds: 30,
+    recommended_sets: 2,
+    recommended_rest_seconds: 15,
+    camera_supported: true,
+    caution_en: 'Avoid sudden or aggressive neck bending if you suffer from cervical discomfort.',
+    caution_hi: 'गर्दन में दर्द होने पर गर्दन को झटके से न मोड़ें।',
+    caution: 'Gardan mein spondylosis dard ho to gardan ko jhatke se upar ya neeche na modhein.',
+    image_url: '/poses/marjaryasana_bitilasana.jpg',
+    target_angles_text: 'Tabletop 90° hips/knees | Spine flexion & extension',
+    benefit_en: 'Mobilizes the entire vertebral column, releases neck tension, and warms up the back.',
+    benefit_hi: 'रीढ़ की हड्डी का लचीलापन बढ़ाता है और पीठ व गर्दन के तनाव को दूर करता है।',
+    category: 'spine',
+    target_muscles: ['Spine', 'Neck', 'Abdominals', 'Shoulders'],
+    suitable_for_injuries: ['Lower Back Pain', 'Cervical Stiffness', 'Desk Strains'],
+    avoid_for_injuries: ['Severe wrist fracture']
+  },
+  {
+    id: 'baddha_konasana',
+    phase: 'warmup',
+    english_name: 'Butterfly Pose',
+    hindi_name: 'बद्ध कोणासन',
+    hinglish_name: 'Baddha Konasana (Butterfly Pose)',
+    how_to_en: [
+      'Sit upright with the soles of your feet touching together.',
+      'Draw your heels in towards your pelvis and hold your feet with both hands.',
+      'Keep your spine tall and relax your shoulders downward.',
+      'Gently flutter your knees up and down like butterfly wings.'
+    ],
+    how_to_hi: [
+      'जमीन पर सीधे बैठकर दोनों तलवों को आपस में मिलाएं।',
+      'एड़ियों को शरीर के करीब लाएं और हाथों से पंजों को पकड़ें।',
+      'रीढ़ को सीधा रखें और कंधों को आराम से ढीला छोड़ें।',
+      'दोनों जांघों को धीरे-धीरे तितली के पंखों की तरह ऊपर-नीचे हिलाएं।'
+    ],
+    how_to: [
+      'Zameen par baithkar dono talwo ko ek doosre se jod lein.',
+      'Aediyo ko shareer ke paas laayein aur haatho se panjo ko pakdein.',
+      'Peeth ko bilkul seedha rakhein aur kandhe dheele karein.',
+      'Dono jaangho ko dheere-dheere titli ke pankho ki tarah upar-neeche hilayein.'
+    ],
+    default_hold_seconds: 30,
+    recommended_sets: 2,
+    recommended_rest_seconds: 15,
+    camera_supported: true,
+    caution_en: 'Place cushions under your knees if you experience groin strain.',
+    caution_hi: 'जांघों या घुटनों में खिंचाव हो तो नीचे तकिए का सहारा लें।',
+    caution: 'Ghutno ya groin mein tez khichaav ya dard ho to niche pillow/cushion ka support lein.',
+    image_url: '/poses/baddha_konasana.jpg',
+    target_angles_text: 'Feet joined | Knees opening | Spine vertical',
+    benefit_en: 'Warms up pelvic joints, increases hip flexibility, and relieves sitting tightness.',
+    benefit_hi: 'कूल्हों और जांघों के जोड़ों को लचीला बनाता है तथा रक्त प्रवाह सुधारता है।',
+    category: 'flexibility',
+    target_muscles: ['Inner Thighs', 'Groin', 'Hips', 'Pelvic Floor'],
+    suitable_for_injuries: ['Tight Hips from Sitting', 'Pelvic Stiffness'],
+    avoid_for_injuries: ['Acute Meniscus Knee Injury']
+  },
+  {
+    id: 'gomukhasana',
+    phase: 'warmup',
+    english_name: 'Cow Face Pose',
+    hindi_name: 'गोमुखासन',
+    hinglish_name: 'Gomukhasana (Shoulder Opener)',
+    how_to_en: [
+      'Sit comfortably and extend your right arm upward, bending elbow behind your head.',
+      'Reach your left arm behind your back to clasp hands together between shoulder blades.',
+      'Keep your chest open and breathe smoothly for 20 seconds, then switch sides.'
+    ],
+    how_to_hi: [
+      'सीधे बैठकर दाएं हाथ को ऊपर उठाकर कोहनी से सिर के पीछे मोड़ें।',
+      'बाएं हाथ को पीठ के पीछे ले जाकर दोनों हाथों की उंगलियों को आपस में पकड़ें।',
+      'छाती को खुला रखें और सामान्य सांस लें, फिर दूसरी तरफ दोहराएं।'
+    ],
+    how_to: [
+      'Seedhe baithkar daayein haath ko upar uthakar peeth ke piche modein.',
+      'Baayein haath ko niche se piche le jaakar dono haatho ki ungliyo ko jodein.',
+      'Chhaati ko khula rakhein aur kandho ko stretch karein.'
+    ],
+    default_hold_seconds: 25,
+    recommended_sets: 2,
+    recommended_rest_seconds: 15,
+    camera_supported: true,
+    caution_en: 'Use a towel or strap between hands if your fingers do not touch.',
+    caution_hi: 'हाथ न मिलने पर बीच में तौलिया या बेल्ट का सहारा लें।',
+    caution: 'Haath aapas mein na milein to towel ya belt ka sahara lein.',
+    image_url: '/poses/griva_sanchalana.jpg',
+    target_angles_text: 'Chest open | Shoulder rotation aligned',
+    benefit_en: 'Releases chronic shoulder hunching, opens the thoracic cage, and relieves rotator cuff fatigue.',
+    benefit_hi: 'कंधों की जकड़न दूर करता है और सीने को फैलाकर सांस लेने की क्षमता बढ़ाता है।',
+    category: 'flexibility',
+    target_muscles: ['Shoulders', 'Triceps', 'Chest', 'Upper Back'],
+    suitable_for_injuries: ['Desk Worker Slouching', 'Stiff Shoulders'],
+    avoid_for_injuries: ['Acute Rotator Cuff Tear']
+  },
+
+  // --- MAIN EXERCISE POSES ---
+  {
+    id: 'tadasana',
+    phase: 'exercise',
+    english_name: 'Mountain Pose',
+    hindi_name: 'ताड़ासन',
+    hinglish_name: 'Tadasana (Mountain Pose)',
+    how_to_en: [
+      'Stand tall with feet close together and weight balanced evenly.',
+      'Roll your shoulders back and gently lengthen your spine.',
+      'Raise your arms overhead or bring hands to prayer position.',
+      'Fix your gaze forward at one point and breathe deeply.'
+    ],
+    how_to_hi: [
+      'दोनों पैरों को पास रखकर सीधे खड़े हों और वजन बराबर बांटें।',
+      'कंधों को पीछे की ओर ढीला छोड़ें और रीढ़ की हड्डी सीधी रखें।',
+      'हाथों को ऊपर उठाकर नमस्कार मुद्रा में जोड़ें या ऊपर खींचें।',
+      'सामने किसी एक बिंदु पर दृष्टि केंद्रित कर धीमी सांस लें।'
+    ],
+    how_to: [
+      'Dono pairo ko paas rakhein aur vajan barabar baantein.',
+      'Kandho ko dheela chhodkar piche roll karein aur reeda ki haddi seedhi rakhein.',
+      'Haathon ko upar uthakar namaskar mudra ya seedha aakash ki taraf kheechein.',
+      'Ek bindu par dhyan kendrit karein aur dheere-dheere saans lein.'
+    ],
+    default_hold_seconds: 25,
+    recommended_sets: 3,
+    recommended_rest_seconds: 20,
+    camera_supported: true,
+    caution_en: 'Keep hands on hips if feeling dizzy or if you have low blood pressure.',
+    caution_hi: 'चक्कर आने या कम रक्तचाप होने पर हाथों को कमर पर रखें।',
+    caution: 'Chakkar aane ya low blood pressure hone par haath kamar par rakhein.',
+    image_url: '/poses/tadasana.jpg',
+    target_angles_text: 'Elbows >= 165° | Shoulders > 150° | Torso erect',
+    benefit_en: 'Strengthens spinal erectors, aligns posture, and stabilizes the core and lower joints.',
+    benefit_hi: 'रीढ़ की हड्डी को सीधा करता है, शारीरिक संतुलन और मुद्रा में सुधार करता है।',
+    category: 'spine',
+    target_muscles: ['Spine', 'Shoulders', 'Calves', 'Core'],
+    suitable_for_injuries: ['Desk stiffness', 'Mild back pain', 'General stiffness'],
+    avoid_for_injuries: ['Severe vertigo']
+  },
+  {
+    id: 'bhujangasana',
+    phase: 'exercise',
+    english_name: 'Cobra Pose',
+    hindi_name: 'भुजंगासन',
+    hinglish_name: 'Bhujangasana (Cobra Pose)',
+    how_to_en: [
+      'Lie on your stomach with palms placed flat under your shoulders.',
+      'Keep elbows tucked close into the sides of your body.',
+      'Inhale and smoothly lift your chest up from the floor.',
+      'Keep your lower belly on the mat and relax your shoulders down.'
+    ],
+    how_to_hi: [
+      'पेट के बल लेटें और हथेलियों को कंधों के नीचे रखें।',
+      'कोहनियों को शरीर के पास सटाकर रखें।',
+      'सांस भरते हुए छाती को धीरे-धीरे जमीन से ऊपर उठाएं।',
+      'नाभि तक का हिस्सा जमीन पर रहे, कंधों पर अधिक तनाव न दें।'
+    ],
+    how_to: [
+      'Pet ke bal latein aur hathheliyo ko kandho ke paas zameen par rakhein.',
+      'Kohniyo ko shareer ke paas chipkaye rakhein.',
+      'Saans lete hue chhaati ko aage se dheere-dheere upar uthayein.',
+      'Naabhi tak ka hissa zameen par rahe, kandho par dabav na dalein.'
+    ],
+    default_hold_seconds: 20,
+    recommended_sets: 3,
+    recommended_rest_seconds: 20,
+    camera_supported: true,
+    caution_en: 'Do not practice if you have severe acute lower back injury or hernia.',
+    caution_hi: 'कमर में गंभीर दर्द या हर्निया होने पर यह आसन न करें।',
+    caution: 'Severe lower back injury ya hernia ho to yeh aasan na karein.',
+    image_url: '/poses/bhujangasana.jpg',
+    target_angles_text: 'Chest lift >= 30° | Elbows tucked in | Pelvis grounded',
+    benefit_en: 'Relieves lower back stiffness, decompresses thoracic spine, and strengthens lumbar erectors.',
+    benefit_hi: 'कमर का दर्द कम करता है, फेफड़ों को खोलता है और रीढ़ को लचीला बनाता है।',
+    category: 'spine',
+    target_muscles: ['Lower Back', 'Chest', 'Shoulders', 'Spinal Erectors'],
+    suitable_for_injuries: ['Cervical Stiffness', 'Desk Slouching', 'Mild Lumbar Tightness'],
+    avoid_for_injuries: ['Acute Disc Herniation', 'Recent Abdominal Surgery']
+  },
+  {
+    id: 'setu_bandhasana',
+    phase: 'exercise',
+    english_name: 'Bridge Pose',
+    hindi_name: 'सेतुबंधासन',
+    hinglish_name: 'Setu Bandhasana (Bridge Pose)',
+    how_to_en: [
+      'Lie on your back, bend knees and place feet flat hip-width apart.',
+      'Extend your arms flat on the floor beside your hips.',
+      'Inhale, press into your feet, and lift your hips and lower back upward.',
+      'Open your chest toward your chin while keeping your thighs parallel.'
+    ],
+    how_to_hi: [
+      'पीठ के बल लेटें, घुटने मोड़ें और पैरों को कूल्हों के पास रखें।',
+      'हाथों को शरीर के पास जमीन पर सीधा रखें।',
+      'सांस लेते हुए कूल्हों और कमर को ऊपर उठाएं।',
+      'छाती को ठोड़ी की ओर लाएं और पैरों को सीधा समानांतर रखें।'
+    ],
+    how_to: [
+      'Peeth ke bal latein aur dono ghutne modkar aediyo ko hips ke paas laayein.',
+      'Haatho ko shareer ke bagal zameen par seedha rakhein.',
+      'Saans lete hue hips aur lower back ko aahista upar uthayein.',
+      'Chhaati ko chin ki taraf laayein aur pair zameen par mazbooti se tikaye rakhein.'
+    ],
+    default_hold_seconds: 25,
+    recommended_sets: 3,
+    recommended_rest_seconds: 20,
+    camera_supported: true,
+    caution_en: 'Keep your head and neck motionless and aligned straight upward while lifting.',
+    caution_hi: 'कमर उठाते समय गर्दन को इधर-उधर न घुमाएं।',
+    caution: 'Gardan mein tez dard ho to sar ko idhar-udhar na ghumayein.',
+    image_url: '/poses/setu_bandhasana.jpg',
+    target_angles_text: 'Pelvis elevated | Knees 90° over ankles | Core active',
+    benefit_en: 'Strengthens gluteals, counters seated pelvic tilt, and alleviates lumbar fatigue.',
+    benefit_hi: 'कमर और नितंबों को मजबूत करता है और रक्त संचार में सुधार करता है।',
+    category: 'strength',
+    target_muscles: ['Glutes', 'Hamstrings', 'Lower Back', 'Pelvis'],
+    suitable_for_injuries: ['Desk Worker Weak Glutes', 'Lower Back Fatigue'],
+    avoid_for_injuries: ['Severe Cervical Disc Bulge']
+  },
+  {
+    id: 'virabhadrasana_ii',
+    phase: 'exercise',
+    english_name: 'Warrior II Pose',
+    hindi_name: 'वीरभद्रासन II',
+    hinglish_name: 'Virabhadrasana II (Warrior 2)',
+    how_to_en: [
+      'Step your feet wide apart, turning right foot out 90 degrees.',
+      'Bend your right knee to a 90-degree angle over your right ankle.',
+      'Extend both arms parallel to the floor, gazing forward over right fingertips.',
+      'Keep your torso erect and hold steady with deep breaths.'
+    ],
+    how_to_hi: [
+      'पैरों को चौड़ा फैलाएं, दाएं पैर को 90 डिग्री बाहर घुमाएं।',
+      'दाएं घुटने को मोड़ें ताकि वह टखने के ठीक ऊपर रहे।',
+      'दोनों हाथों को कंधों की सीध में फैलाएं और दाएं हाथ की उंगलियों की ओर देखें।',
+      'रीढ़ सीधी रखें और स्थिरता से सांस लेते रहें।'
+    ],
+    how_to: [
+      'Dono pair chauda failayein, daayein pair ko 90 degree bahar karein.',
+      'Daayein ghutne ko modkar aankle ke upar layein.',
+      'Dono haatho ko kandho ki seedh mein failayein aur aage dekhein.',
+      'Peeth seedhi rakhein aur shareer mein shakti mehsus karein.'
+    ],
+    default_hold_seconds: 25,
+    recommended_sets: 3,
+    recommended_rest_seconds: 20,
+    camera_supported: true,
+    caution_en: 'Do not let the front knee collapse inward or overshoot the ankle.',
+    caution_hi: 'आगे वाले घुटने को अंदर न झुकने दें और टखने के आगे न जाने दें।',
+    caution: 'Aage wale ghutne ko andar na jhukne dein.',
+    image_url: '/poses/virabhadrasana_ii.jpg',
+    target_angles_text: 'Front knee 90° | Back leg 180° | Arms horizontal',
+    benefit_en: 'Builds isometric stamina in quadriceps and core, expands chest, and enhances mental focus.',
+    benefit_hi: 'पैरों और जांघों को शक्तिशाली बनाता है तथा एकाग्रता और आत्मबल बढ़ाता है।',
+    category: 'strength',
+    target_muscles: ['Quadriceps', 'Hips', 'Shoulders', 'Core'],
+    suitable_for_injuries: ['General Fatigue', 'Weak Legs', 'Postural Slump'],
+    avoid_for_injuries: ['Severe Acute Knee Meniscus Tear']
+  },
+  {
+    id: 'vrikshasana',
+    phase: 'exercise',
+    english_name: 'Tree Pose',
+    hindi_name: 'वृक्षासन',
+    hinglish_name: 'Vrikshasana (Tree Pose)',
+    how_to_en: [
+      'Stand tall and shift your body weight to your left leg.',
+      'Place your right foot against your inner left thigh or calf (avoid the knee).',
+      'Join hands at chest center in prayer or extend them gracefully overhead.',
+      'Focus your eyes on an unmoving spot in front of you to maintain balance.'
+    ],
+    how_to_hi: [
+      'सीधे खड़े होकर अपना वजन बाएं पैर पर लाएं।',
+      'दाएं पैर को मोड़कर तलवे को बाईं जांघ या पिंडली पर टिकाएं (घुटने पर नहीं)।',
+      'हाथों को छाती के आगे नमस्कार मुद्रा में जोड़ें या ऊपर उठाएं।',
+      'सामने किसी एक स्थान पर ध्यान केंद्रित करके संतुलन बनाएं।'
+    ],
+    how_to: [
+      'Tadasana mein khade hokar vajan baayein pair par shift karein.',
+      'Daayein pair ko modkar talwe ko baayein jaangh (inner thigh) ya calf par lagayein (ghutne par nahi).',
+      'Haatho ko chhaati ke aage namaskar mudra mein jodein ya upar stretch karein.',
+      'Saamne ek jagah focus karke santulan banayein.'
+    ],
+    default_hold_seconds: 20,
+    recommended_sets: 2,
+    recommended_rest_seconds: 15,
+    camera_supported: true,
+    caution_en: 'Use a wall for balance support if needed; never press against the side of the knee joint.',
+    caution_hi: 'संतुलन में कठिनाई हो तो दीवार का सहारा लें; घुटने के जोड़ पर दबाव न डालें।',
+    caution: 'Balancing mein dikkat ho to deewar ka sahara lein; talwe ko seedhe ghutne ke jodh par kabhi na dabayein.',
+    image_url: '/poses/vrikshasana.jpg',
+    target_angles_text: 'Standing leg >= 165° | Pelvis level | Torso upright',
+    benefit_en: 'Improves neuromuscular balance, ankle stability, and hip joint mobility.',
+    benefit_hi: 'संतुलन, एकाग्रता और पैरों की मांसपेशियों को मजबूती प्रदान करता है।',
+    category: 'balance',
+    target_muscles: ['Ankles', 'Calves', 'Core', 'Glutes'],
+    suitable_for_injuries: ['Mild Ankle Weakness', 'Posture Deficits'],
+    avoid_for_injuries: ['Acute Vertigo', 'Severe Knee Instability']
+  },
+  {
+    id: 'adho_mukha_svanasana',
+    phase: 'exercise',
+    english_name: 'Downward Facing Dog',
+    hindi_name: 'अधोमुख श्वानासन',
+    hinglish_name: 'Adho Mukha Svanasana (Downward Dog)',
+    how_to_en: [
+      'Start on hands and knees, then press into hands and lift hips high toward ceiling.',
+      'Form an inverted V-shape, lengthening your spine and pressing heels toward mat.',
+      'Relax your neck and gaze gently toward your navel.'
+    ],
+    how_to_hi: [
+      'हाथों और घुटनों के बल आएं, फिर घुटनों को उठाकर कूल्हों को ऊपर आकाश की ओर उठाएं।',
+      'शरीर से उल्टा V आकार बनाएं और एड़ियों को जमीन की ओर दबाएं।',
+      'गर्दन को ढीला छोड़ें और नाभि की ओर देखें।'
+    ],
+    how_to: [
+      'Hathheliyo aur pairo ke bal aakar hips ko aakash ki taraf uthayein.',
+      'Shareer se ulta V shape banayein aur peeth ko lamba stretch karein.',
+      'Aediyo ko zameen par lagane ki koshish karein aur saans lein.'
+    ],
+    default_hold_seconds: 30,
+    recommended_sets: 2,
+    recommended_rest_seconds: 20,
+    camera_supported: true,
+    caution_en: 'Bend knees slightly if your hamstrings feel tight; do not strain wrists.',
+    caution_hi: 'जांघों में खिंचाव हो तो घुटने थोड़े मोड़ें; कलाई पर अधिक दबाव न दें।',
+    caution: 'Hamstrings tight hon to ghutno ko thoda bend rakhein.',
+    image_url: '/poses/marjaryasana_bitilasana.jpg',
+    target_angles_text: 'Inverted V shape | Spine lengthened | Hips elevated',
+    benefit_en: 'Decompresses the entire spine, calms brain circulation, and stretches hamstrings.',
+    benefit_hi: 'रीढ़ की हड्डी को लंबा करता है, रक्त संचार मस्तिष्क की ओर बढ़ाता है और तनाव घटाता है।',
+    category: 'strength',
+    target_muscles: ['Hamstrings', 'Calves', 'Shoulders', 'Spine'],
+    suitable_for_injuries: ['Desk Back Stiffness', 'Mild Sciatica'],
+    avoid_for_injuries: ['Severe Carpal Tunnel', 'High Blood Pressure']
+  },
+  {
+    id: 'trikonasana',
+    phase: 'exercise',
+    english_name: 'Triangle Pose',
+    hindi_name: 'त्रिकोणासन',
+    hinglish_name: 'Trikonasana (Triangle Pose)',
+    how_to_en: [
+      'Stand with feet wide apart. Turn right foot 90 degrees outward.',
+      'Extend right arm down to shin or ankle while extending left arm straight up toward ceiling.',
+      'Turn your gaze toward your left thumb and keep both sides of torso long.'
+    ],
+    how_to_hi: [
+      'पैरों को चौड़ा फैलाएं। दाएं पैर को 90 डिग्री बाहर घुमाएं।',
+      'दाएं हाथ को दाएं पैर की पिंडली या टखने पर टिकाएं और बाएं हाथ को ऊपर उठाएं।',
+      'बाएं हाथ के अंगूठे की ओर देखें और शरीर को एक सीध में रखें।'
+    ],
+    how_to: [
+      'Pairo ko door failayein. Daayein pair ko bahar ghumayein.',
+      'Daayein haath ko pair par tikaayein aur baayein haath ko upar ceiling ki taraf stretch karein.',
+      'Kamar ko seedha rakhein aur upar wale haath ki taraf dekhein.'
+    ],
+    default_hold_seconds: 25,
+    recommended_sets: 2,
+    recommended_rest_seconds: 15,
+    camera_supported: true,
+    caution_en: 'Do not lock your front knee; keep a soft micro-bend to protect the joint.',
+    caution_hi: 'घुटने को बहुत ज्यादा पीछे न धकेलें, हल्का सा ढीला रखें।',
+    caution: 'Ghutne par tez dabav na dalein.',
+    image_url: '/poses/virabhadrasana_ii.jpg',
+    target_angles_text: 'Triangle alignment | Lateral torso stretch',
+    benefit_en: 'Opens the chest and hips, stretches hamstrings and obliques, and improves spinal lateral mobility.',
+    benefit_hi: 'कमर के दोनों ओर के खिंचाव को दूर करता है और सीने व कूल्हों को खोलता है।',
+    category: 'flexibility',
+    target_muscles: ['Obliques', 'Hamstrings', 'Hips', 'Spine'],
+    suitable_for_injuries: ['Desk Slouching', 'Stiff Spine'],
+    avoid_for_injuries: ['Severe Disc Herniation', 'Low Blood Pressure']
+  },
+  {
+    id: 'ardha_matsyendrasana',
+    phase: 'exercise',
+    english_name: 'Seated Spinal Twist',
+    hindi_name: 'अर्ध मत्स्येन्द्रासन',
+    hinglish_name: 'Ardha Matsyendrasana (Spinal Twist)',
+    how_to_en: [
+      'Sit upright with legs extended forward.',
+      'Bend your right knee and step your right foot over your left knee.',
+      'Wrap your left arm around right knee and rotate torso rightward.',
+      'Gaze gently over right shoulder while lengthening your spine.'
+    ],
+    how_to_hi: [
+      'दोनों पैर सामने फैलाकर सीधे बैठें।',
+      'दाएं पैर को मोड़कर बाएं घुटने के बाहर की तरफ रखें।',
+      'बाएं हाथ से दाएं घुटने को पकड़ें और दाईं ओर धीरे से घूमें।',
+      'रीढ़ सीधी रखें और दाएं कंधे के ऊपर से पीछे देखें।'
+    ],
+    how_to: [
+      'Dono pair aage failakar baith jayein.',
+      'Daayein pair ko modkar baayein ghutne ke bahar rakhein.',
+      'Baayein haath se daayein ghutne ko pakdein aur daayein taraf twist karein.',
+      'Kamar seedhi rakhein aur daayein kandhe ke upar se piche dekhein.'
+    ],
+    default_hold_seconds: 25,
+    recommended_sets: 2,
+    recommended_rest_seconds: 15,
+    camera_supported: true,
+    caution_en: 'Do not force the twist; move from the thoracic spine rather than lower back.',
+    caution_hi: 'झटके से न घूमें, धीरे-धीरे छाती से घूमें।',
+    caution: 'Kamar par jhatka na dein.',
+    image_url: '/poses/virabhadrasana_ii.jpg',
+    target_angles_text: 'Torso erect | Joints aligned',
+    benefit_en: 'Restores rotational mobility to the vertebrae and stimulates abdominal digestive organs.',
+    benefit_hi: 'रीढ़ की हड्डी को लचीला बनाता है और पाचन तंत्र को सक्रिय करता है।',
+    category: 'flexibility',
+    target_muscles: ['Spine', 'Obliques', 'Chest', 'Hips'],
+    suitable_for_injuries: ['Desk Sitting Stiffness', 'Digestive Sluggishness'],
+    avoid_for_injuries: ['Acute Disc Prolapse', 'Recent Spinal Surgery']
+  },
+
+  // --- RELAXATION & COOL-DOWN POSES ---
+  {
+    id: 'balasana',
+    phase: 'relax',
+    english_name: "Child's Pose",
+    hindi_name: 'बालासन',
+    hinglish_name: "Balasana (Child's Pose)",
+    how_to_en: [
+      'Kneel on the floor with knees slightly apart and toes touching.',
+      'Lower your hips to your heels and fold forward, resting forehead on the mat.',
+      'Extend your arms forward or rest them comfortably beside your legs.',
+      'Allow your entire spine and shoulders to soften with deep breaths.'
+    ],
+    how_to_hi: [
+      'घुटनों के बल बैठें और घुटनों में थोड़ा अंतर रखें।',
+      'सांस छोड़ते हुए आगे झुकें और माथा जमीन पर टिकाएं।',
+      'हाथों को आगे फैलाएं या पैरों के पास आराम से रखें।',
+      'रीढ़ और कंधों को पूरी तरह ढीला छोड़ें और विश्राम करें।'
+    ],
+    how_to: [
+      'Vajrasana mein baithkar dono ghutno mein thodi doori banayein.',
+      'Saans chhodte hue aage jhukein aur maatha zameen par tikaayein.',
+      'Haatho ko aage lamba karein ya shareer ke bagal mein aaram se rakhein.',
+      'Poori peeth aur kandho ko dheela chhod dein aur gehra aaram lein.'
+    ],
+    default_hold_seconds: 35,
+    recommended_sets: 2,
+    recommended_rest_seconds: 20,
+    camera_supported: true,
+    caution_en: 'Place a blanket under your knees or a cushion between your thighs if knees feel strained.',
+    caution_hi: 'घुटनों में दर्द हो तो नीचे कंबल या जांघों के बीच तकिया रखें।',
+    caution: 'Ghutno mein dard ho to thighs ke beech mein takiya rakhein.',
+    image_url: '/poses/balasana.jpg',
+    target_angles_text: 'Hips to heels | Spine elongated | Shoulders relaxed',
+    benefit_en: 'Calms the sympathetic nervous system, decompresses lower back discs, and restores breathing rhythm.',
+    benefit_hi: 'मानसिक तनाव शांत करता है और पीठ के निचले हिस्से को गहरा आराम देता है।',
+    category: 'relaxation',
+    target_muscles: ['Hips', 'Spine', 'Shoulders', 'Lower Back'],
+    suitable_for_injuries: ['Lower Back Pain', 'Stress', 'High Blood Pressure', 'Neck Strain'],
+    avoid_for_injuries: ['Severe Acute Knee Ligament Tear']
+  },
+  {
+    id: 'vajrasana',
+    phase: 'relax',
+    english_name: 'Thunderbolt Pose',
+    hindi_name: 'वज्रासन',
+    hinglish_name: 'Vajrasana (Thunderbolt Pose)',
+    how_to_en: [
+      'Kneel on the mat with big toes touching behind you.',
+      'Lower your buttocks comfortably into the space between your heels.',
+      'Rest both palms flat on your knees and keep your back straight.',
+      'Close your eyes and breathe calmly and steadily.'
+    ],
+    how_to_hi: [
+      'घुटनों को मोड़कर बैठें, दोनों पैर के अंगूठे आपस में मिले हों।',
+      'नितंबों को एड़ियों के बीच आराम से टिकाएं।',
+      'हथेलियों को घुटनों पर रखें और रीढ़ सीधी रखें।',
+      'आंखें बंद कर शांत मन से सामान्य सांस लें।'
+    ],
+    how_to: [
+      'Ghutno ko modkar baith jayein, dono anguthe aapas mein chhoote hon.',
+      'Koolho (hips) ko aediyo ke beech aaram se tikaayein.',
+      'Dono hathheliyo ko ghutno par rakhein aur reeda seedhi rakhein.',
+      'Aankhein band karke aam tarike se saans lein aur chashma utar dein.'
+    ],
+    default_hold_seconds: 40,
+    recommended_sets: 2,
+    recommended_rest_seconds: 20,
+    camera_supported: true,
+    caution_en: 'Avoid sitting in this posture immediately following knee or ankle surgery.',
+    caution_hi: 'घुटने या टखने की हालिया सर्जरी के बाद यह न करें।',
+    caution: 'Ankle ya knee surgery ke turant baad ise na karein.',
+    image_url: '/poses/vajrasana.jpg',
+    target_angles_text: 'Spine 180° vertical | Heels under hips | Palms on knees',
+    benefit_en: 'Aids digestive circulation, supports pelvic posture, and calms mental chatter.',
+    benefit_hi: 'पाचन तंत्र को मजबूत करता है और मन को शांति व स्थिरता देता है।',
+    category: 'relaxation',
+    target_muscles: ['Quadriceps', 'Ankles', 'Digestive Organs', 'Spine'],
+    suitable_for_injuries: ['Indigestion', 'Mild Sciatica', 'Desk Worker Slouching'],
+    avoid_for_injuries: ['Severe Knee Osteoarthritis', 'Recent Knee Surgery']
+  },
+  {
+    id: 'shavasana',
+    phase: 'relax',
+    english_name: 'Corpse Pose',
+    hindi_name: 'शवासन',
+    hinglish_name: 'Shavasana (Restorative Corpse Pose)',
+    how_to_en: [
+      'Lie flat on your back with feet falling open naturally.',
+      'Rest arms alongside body, palms facing upward toward the ceiling.',
+      'Close your eyes and let every muscle surrender completely into the mat.',
+      'Focus gently on your natural breath flow for deep healing.'
+    ],
+    how_to_hi: [
+      'पीठ के बल लेट जाएं, पैरों को थोड़ा खोलकर ढीला छोड़ें।',
+      'हाथों को शरीर के पास रखें, हथेलियां ऊपर आकाश की ओर हों।',
+      'आंखें बंद करें और शरीर के प्रत्येक अंग को पूरी तरह विश्राम दें।',
+      'शांत मन से धीमी सांसों पर ध्यान केंद्रित करें।'
+    ],
+    how_to: [
+      'Peeth ke bal latein aur pair thoda failakar dheela chhod dein.',
+      'Haath shareer ke bagal mein rakhein, hathheliya upar aakash ki taraf.',
+      'Aankhein band karein aur shareer ke har hisse ko aaram dein.',
+      'Dheemi saanso par dhyan kendrit karein aur mann ko shaant karein.'
+    ],
+    default_hold_seconds: 60,
+    recommended_sets: 1,
+    recommended_rest_seconds: 0,
+    camera_supported: true,
+    caution_en: 'Place a small pillow or rolled blanket under knees if lower back feels arched.',
+    caution_hi: 'कमर में खिंचाव हो तो घुटनों के नीचे तकिया रखें।',
+    caution: 'Kamar mein dard ho to ghutno ke niche takiya rakhein.',
+    image_url: '/poses/setu_bandhasana.jpg',
+    target_angles_text: 'Supine relaxation | Muscle surrender',
+    benefit_en: 'Normalizes blood pressure, clears accumulated lactic acid, and activates profound parasympathetic recovery.',
+    benefit_hi: 'रक्तचाप को नियंत्रित करता है, थकान मिटाता है और मानसिक तनाव को पूरी तरह समाप्त करता है।',
+    category: 'relaxation',
+    target_muscles: ['Entire Body', 'Nervous System', 'Diaphragm'],
+    suitable_for_injuries: ['High Blood Pressure', 'Chronic Stress', 'All Injuries'],
+    avoid_for_injuries: []
+  },
+  {
+    id: 'pawanmuktasana',
+    phase: 'relax',
+    english_name: 'Wind-Relieving Pose',
+    hindi_name: 'पवनमुक्तासन',
+    hinglish_name: 'Pawanmuktasana (Knee-to-Chest)',
+    how_to_en: [
+      'Lie on your back, exhale and draw both knees tightly into your chest.',
+      'Clasp your hands or forearms around your shins.',
+      'Gently rock side to side to massage your lower spine and sacrum.',
+      'Breathe deeply into your lower abdomen.'
+    ],
+    how_to_hi: [
+      'पीठ के बल लेटें, सांस छोड़ते हुए दोनों घुटनों को सीने की ओर लाएं।',
+      'हाथों से घुटनों को पकड़ें और धीरे से सीने से सटाएं।',
+      'कमर के निचले हिस्से को जमीन पर दबाते हुए धीमी सांस लें।'
+    ],
+    how_to: [
+      'Peeth ke bal latein aur dono ghutno ko modkar chhaati ke paas laayein.',
+      'Haatho se ghutno ko pakdein aur dheere se dabayein.',
+      'Lower back ko mat par daba kar gehra saans lein.'
+    ],
+    default_hold_seconds: 30,
+    recommended_sets: 2,
+    recommended_rest_seconds: 15,
+    camera_supported: true,
+    caution_en: 'Keep your head resting flat on mat if neck feels strained.',
+    caution_hi: 'गर्दन में दर्द हो तो सिर को जमीन पर ही टिका रहने दें।',
+    caution: 'Gardan mein dard ho to sar ko upar na uthayein.',
+    image_url: '/poses/balasana.jpg',
+    target_angles_text: 'Knees to chest | Lumbar grounded',
+    benefit_en: 'Relieves lower back compression, aids digestion, and releases pelvic tightness.',
+    benefit_hi: 'कमर दर्द में तुरंत राहत दिलाता है, गैस और अपच दूर करता है।',
+    category: 'relaxation',
+    target_muscles: ['Lower Back', 'Glutes', 'Abdominal Wall'],
+    suitable_for_injuries: ['Lower Back Pain', 'Sciatica', 'Indigestion'],
+    avoid_for_injuries: ['Recent Abdominal Surgery', 'Severe Hernia']
+  }
+];
+
+export function getPoseById(id: string): EnrichedPose {
+  const found = ALL_POSES.find((p) => p.id === id);
+  return found || ALL_POSES[0];
+}
+
+export interface PhaseScheduleItem {
+  pose: EnrichedPose;
+  phase: WorkoutPhase;
+  sets: number;
+  hold_seconds: number;
+  rest_seconds: number;
+  tip: string;
+}
+
+/**
+ * 3-Phase Recommendation Engine:
+ * Divides any available time into Warmup (20%), Main Exercise (60%), and Relax (20%)!
+ */
+export function recommendPosesForProfile({
+  query = '',
+  designation = '',
+  injury = '',
+  minutesAvailable = 15,
+}: {
+  query?: string;
+  designation?: string;
+  injury?: string;
+  minutesAvailable?: number;
+}): {
+  summary: string;
+  phases: {
+    warmup: PhaseScheduleItem[];
+    exercise: PhaseScheduleItem[];
+    relax: PhaseScheduleItem[];
+  };
+  allPoses: PhaseScheduleItem[];
+} {
+  const q = (query + ' ' + designation + ' ' + injury).toLowerCase();
+
+  // Filter out poses that should be avoided based on injury
+  let safePoses = ALL_POSES.filter((p) => {
+    if (injury && injury !== 'None / Healthy' && injury !== 'None') {
+      const injLower = injury.toLowerCase();
+      const avoids = p.avoid_for_injuries.some(
+        (a) => injLower.includes(a.toLowerCase()) || a.toLowerCase().includes(injLower)
+      );
+      if (avoids) return false;
+    }
+    return true;
+  });
+
+  const warmupPool = safePoses.filter((p) => p.phase === 'warmup');
+  const exercisePool = safePoses.filter((p) => p.phase === 'exercise');
+  const relaxPool = safePoses.filter((p) => p.phase === 'relax');
+
+  // Intelligent counts based on available time
+  let warmupCount = 1;
+  let exerciseCount = 2;
+  let relaxCount = 1;
+  let setsMultiplier = 2;
+
+  if (minutesAvailable >= 30) {
+    warmupCount = 2;
+    exerciseCount = 4;
+    relaxCount = 2;
+    setsMultiplier = 3;
+  } else if (minutesAvailable >= 20) {
+    warmupCount = 2;
+    exerciseCount = 3;
+    relaxCount = 1;
+    setsMultiplier = 2;
+  } else if (minutesAvailable >= 15) {
+    warmupCount = 1;
+    exerciseCount = 3;
+    relaxCount = 1;
+    setsMultiplier = 2;
+  } else {
+    // 10 mins quick
+    warmupCount = 1;
+    exerciseCount = 2;
+    relaxCount = 1;
+    setsMultiplier = 1;
+  }
+
+  // Sort exercises based on user's primary goal / designation
+  const sortedExercisePool = [...exercisePool].sort((a, b) => {
+    let aScore = 0;
+    let bScore = 0;
+    if (q.includes('back') || q.includes('lumbar') || q.includes('kamar') || q.includes('desk')) {
+      if (a.id === 'bhujangasana' || a.id === 'setu_bandhasana') aScore += 5;
+      if (b.id === 'bhujangasana' || b.id === 'setu_bandhasana') bScore += 5;
+    }
+    if (q.includes('posture') || q.includes('height') || q.includes('spine')) {
+      if (a.id === 'tadasana' || a.id === 'virabhadrasana_ii') aScore += 5;
+      if (b.id === 'tadasana' || b.id === 'virabhadrasana_ii') bScore += 5;
+    }
+    if (q.includes('knee') || q.includes('leg') || q.includes('balance')) {
+      if (a.id === 'tadasana' || a.id === 'vrikshasana') aScore += 5;
+      if (b.id === 'tadasana' || b.id === 'vrikshasana') bScore += 5;
+    }
+    return bScore - aScore;
+  });
+
+  const selectedWarmup = warmupPool.slice(0, warmupCount);
+  const selectedExercise = sortedExercisePool.slice(0, exerciseCount);
+  const selectedRelax = relaxPool.slice(0, relaxCount);
+
+  const makeItems = (list: EnrichedPose[], phase: WorkoutPhase): PhaseScheduleItem[] =>
+    list.map((pose) => ({
+      pose,
+      phase,
+      sets: phase === 'relax' ? Math.max(1, setsMultiplier - 1) : setsMultiplier,
+      hold_seconds: pose.default_hold_seconds,
+      rest_seconds: pose.recommended_rest_seconds,
+      tip: pose.how_to[0] || 'Keep calm, steady breathing.',
+    }));
+
+  const warmupItems = makeItems(selectedWarmup, 'warmup');
+  const exerciseItems = makeItems(selectedExercise, 'exercise');
+  const relaxItems = makeItems(selectedRelax, 'relax');
+  const allItems = [...warmupItems, ...exerciseItems, ...relaxItems];
+
+  let summary = `Scientifically structured ${minutesAvailable}-minute session: Warmup (${warmupItems.length} asanas) → Main Therapy (${exerciseItems.length} asanas) → Restorative Cool-down (${relaxItems.length} asanas).`;
+  if (designation) {
+    summary += ` Counteracts ${designation} physical stressors.`;
+  }
+  if (injury && injury !== 'None / Healthy' && injury !== 'None') {
+    summary += ` Modified to safeguard your ${injury}.`;
+  }
+
+  return {
+    summary,
+    phases: {
+      warmup: warmupItems,
+      exercise: exerciseItems,
+      relax: relaxItems,
+    },
+    allPoses: allItems,
+  };
+}
